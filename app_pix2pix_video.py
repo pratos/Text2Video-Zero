@@ -14,23 +14,12 @@ def create_demo(model: Model):
             'replace man with robot', 512, 0, 1.0],
         ['__assets__/pix2pix_video_2fps/white-swan.mp4',
             'replace swan with mallard', 512, 0, 1.5],
-        ['__assets__/pix2pix_video_2fps/boat.mp4',
-            'add city skyline in the background', 512, 0, 1.5],
-        ['__assets__/pix2pix_video_2fps/ballet.mp4',
-            'make her a golden sculpture', 512, 0, 1.0],
+        # ['__assets__/pix2pix_video_2fps/boat.mp4',
+        #     'add city skyline in the background', 512, 0, 1.5],
+        # ['__assets__/pix2pix_video_2fps/ballet.mp4',
+        #     'make her a golden sculpture', 512, 0, 1.0],
     ]
     with gr.Blocks() as demo:
-        with gr.Row():
-            gr.Markdown('## Video Instruct Pix2Pix')
-        with gr.Row():
-            gr.HTML(
-                """
-                <div style="text-align: left; auto;">
-                <h2 style="font-weight: 450; font-size: 1rem; margin: 0rem">
-                    Description: For performance purposes, our current preview release supports any input videos but caps output videos to no longer than 15 seconds and the input videos are scaled down before processing. For faster inference you can choose lower output frames per seconds from Advanced Options.
-                </h3>
-                </div>
-                """)
 
         with gr.Row():
             with gr.Column():
@@ -40,8 +29,6 @@ def create_demo(model: Model):
                 prompt = gr.Textbox(label='Prompt')
                 run_button = gr.Button(label='Run')
                 with gr.Accordion('Advanced options', open=False):
-                    watermark = gr.Radio(["Picsart AI Research", "Text2Video-Zero",
-                                         "None"], label="Watermark", value='Picsart AI Research')
                     image_resolution = gr.Slider(label='Image Resolution',
                                                  minimum=256,
                                                  maximum=1024,
@@ -86,7 +73,7 @@ def create_demo(model: Model):
             end_t,
             out_fps,
             chunk_size,
-            watermark
+            None
         ]
 
         gr.Examples(examples=examples,

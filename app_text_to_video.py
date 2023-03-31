@@ -6,15 +6,15 @@ from hf_utils import get_model_list
 on_huggingspace = os.environ.get("SPACE_AUTHOR_NAME") == "PAIR"
 
 examples = [
-    ["an astronaut waving the arm on the moon"],
-    ["a sloth surfing on a wakeboard"],
-    ["an astronaut walking on a street"],
-    ["a cute cat walking on grass"],
-    ["a horse is galloping on a street"],
-    ["an astronaut is skiing down the hill"],
-    ["a gorilla walking alone down the street"],
-    ["a gorilla dancing on times square"],
-    ["A panda dancing dancing like crazy on Times Square"],
+    # ["an astronaut waving the arm on the moon"],
+    # ["a sloth surfing on a wakeboard"],
+    # ["an astronaut walking on a street"],
+    # ["a cute cat walking on grass"],
+    # ["a horse is galloping on a street"],
+    # ["an astronaut is skiing down the hill"],
+    # ["a gorilla walking alone down the street"],
+    # ["a gorilla dancing on times square"],
+    # ["A panda dancing dancing like crazy on Times Square"],
 ]
 
 
@@ -22,16 +22,16 @@ def create_demo(model: Model):
 
     with gr.Blocks() as demo:
         with gr.Row():
-            gr.Markdown('## Text2Video-Zero: Video Generation')
-        with gr.Row():
-            gr.HTML(
-                """
-                <div style="text-align: left; auto;">
-                <h2 style="font-weight: 450; font-size: 1rem; margin: 0rem">
-                    Description: Simply input <b>any textual prompt</b> to generate videos right away and unleash your creativity and imagination! You can also select from the examples below. For performance purposes, our current preview release by default generates only 8 output frames and output 4s videos, but you can increase it from Advanced Options.
-                </h3>
-                </div>
-                """)
+            gr.Markdown('## Text2Video-Zero: Video Generation (Gen2)')
+        # with gr.Row():
+        #     gr.HTML(
+        #         """
+        #         <div style="text-align: left; auto;">
+        #         <h2 style="font-weight: 450; font-size: 1rem; margin: 0rem">
+        #             Description: Simply input <b>any textual prompt</b> to generate videos right away and unleash your creativity and imagination! You can also select from the examples below. For performance purposes, our current preview release by default generates only 8 output frames and output 4s videos, but you can increase it from Advanced Options.
+        #         </h3>
+        #         </div>
+        #         """)
 
         with gr.Row():
             with gr.Column():
@@ -43,9 +43,7 @@ def create_demo(model: Model):
                 prompt = gr.Textbox(label='Prompt')
                 run_button = gr.Button(label='Run')
                 with gr.Accordion('Advanced options', open=False):
-                    watermark = gr.Radio(["Picsart AI Research", "Text2Video-Zero",
-                                         "None"], label="Watermark", value='Picsart AI Research')
-
+                    
                     video_length = gr.Number(
                         label="Video length", value=8, precision=0)
                     chunk_size = gr.Slider(
@@ -76,7 +74,7 @@ def create_demo(model: Model):
             n_prompt,
             chunk_size,
             video_length,
-            watermark,
+            None,
         ]
 
         gr.Examples(examples=examples,
